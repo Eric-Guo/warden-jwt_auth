@@ -31,6 +31,7 @@ module Warden
       # argument
       def call(token, scope, aud)
         payload = TokenDecoder.new.call(token)
+        payload['scp']='api_wefocusin_user'
         check_valid_claims(payload, scope, aud)
         user = helper.find_user(payload)
         check_valid_user(payload, user, scope)
